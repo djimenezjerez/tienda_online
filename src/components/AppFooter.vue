@@ -1,79 +1,66 @@
 <template>
-  <v-footer height="40" app>
+  <v-footer height="35" app class="border-t-thin">
     <a
       v-for="item in items"
       :key="item.title"
       :href="item.href"
       :title="item.title"
-      class="d-inline-block mx-2 social-link"
+      class="d-inline-block mx-2"
       rel="noopener noreferrer"
       target="_blank"
     >
-      <v-icon
-        :icon="item.icon"
-        :size="item.icon === '$vuetify' ? 24 : 16"
-      />
+      <v-icon :icon="item.icon" :size="16" :color="item.color" />
     </a>
 
     <div
       class="text-caption text-disabled"
-      style="position: absolute; right: 16px;"
+      style="position: absolute; right: 16px"
     >
-      &copy; 2016-{{ (new Date()).getFullYear() }} <span class="d-none d-sm-inline-block">Vuetify, LLC</span>
-      —
-      <a
-        class="text-decoration-none on-surface"
-        href="https://vuetifyjs.com/about/licensing/"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        MIT License
-      </a>
+      &copy; {{ new Date().getFullYear() }}
+      <span class="d-none d-sm-inline-block">{{ store.name }}</span>
     </div>
   </v-footer>
 </template>
 
 <script setup>
-  const items = [
-    {
-      title: 'Vuetify Documentation',
-      icon: `$vuetify`,
-      href: 'https://vuetifyjs.com/',
-    },
-    {
-      title: 'Vuetify Support',
-      icon: 'mdi-shield-star-outline',
-      href: 'https://support.vuetifyjs.com/',
-    },
-    {
-      title: 'Vuetify X',
-      icon: ['M2.04875 3.00002L9.77052 13.3248L1.99998 21.7192H3.74882L10.5519 14.3697L16.0486 21.7192H22L13.8437 10.8137L21.0765 3.00002H19.3277L13.0624 9.76874L8.0001 3.00002H2.04875ZM4.62054 4.28821H7.35461L19.4278 20.4308H16.6937L4.62054 4.28821Z'],
-      href: 'https://x.com/vuetifyjs',
-    },
-    {
-      title: 'Vuetify GitHub',
-      icon: `mdi-github`,
-      href: 'https://github.com/vuetifyjs/vuetify',
-    },
-    {
-      title: 'Vuetify Discord',
-      icon: ['M22,24L16.75,19L17.38,21H4.5A2.5,2.5 0 0,1 2,18.5V3.5A2.5,2.5 0 0,1 4.5,1H19.5A2.5,2.5 0 0,1 22,3.5V24M12,6.8C9.32,6.8 7.44,7.95 7.44,7.95C8.47,7.03 10.27,6.5 10.27,6.5L10.1,6.33C8.41,6.36 6.88,7.53 6.88,7.53C5.16,11.12 5.27,14.22 5.27,14.22C6.67,16.03 8.75,15.9 8.75,15.9L9.46,15C8.21,14.73 7.42,13.62 7.42,13.62C7.42,13.62 9.3,14.9 12,14.9C14.7,14.9 16.58,13.62 16.58,13.62C16.58,13.62 15.79,14.73 14.54,15L15.25,15.9C15.25,15.9 17.33,16.03 18.73,14.22C18.73,14.22 18.84,11.12 17.12,7.53C17.12,7.53 15.59,6.36 13.9,6.33L13.73,6.5C13.73,6.5 15.53,7.03 16.56,7.95C16.56,7.95 14.68,6.8 12,6.8M9.93,10.59C10.58,10.59 11.11,11.16 11.1,11.86C11.1,12.55 10.58,13.13 9.93,13.13C9.29,13.13 8.77,12.55 8.77,11.86C8.77,11.16 9.28,10.59 9.93,10.59M14.1,10.59C14.75,10.59 15.27,11.16 15.27,11.86C15.27,12.55 14.75,13.13 14.1,13.13C13.46,13.13 12.94,12.55 12.94,11.86C12.94,11.16 13.45,10.59 14.1,10.59Z'],
-      href: 'https://community.vuetifyjs.com/',
-    },
-    {
-      title: 'Vuetify Reddit',
-      icon: `mdi-reddit`,
-      href: 'https://reddit.com/r/vuetifyjs',
-    },
-  ]
+import { useAppStore } from "@/stores/app";
+import { storeToRefs } from "pinia";
+
+const { store } = storeToRefs(useAppStore());
+
+// TODO: Agregar URL de redes sociales en el controlador de la tienda
+const items = [
+  {
+    title: "TikTok",
+    icon: [
+      "M20.5 2H4.5C3.1215 2 2 3.1215 2 4.5v16C2 21.8785 3.1215 23 4.5 23h16c1.3785 0 2.5-1.1215 2.5-2.5V4.5C23 3.1215 21.8785 2 20.5 2zm-1.997 9.1615c-.1135.0105-.2285.0175-.345.0175-1.3115 0-2.464-.6745-3.1345-1.694 0 2.6745 0 5.7175 0 5.7685 0 2.3545-1.909 4.2635-4.2635 4.2635s-4.2635-1.909-4.2635-4.2635S8.4055 10.99 10.76 10.99c.089 0 .176.008.2635.0135v2.101c-.0875-.0105-.1735-.0265-.2635-.0265-1.202 0-2.176.974-2.176 2.176s.974 2.176 2.176 2.176 2.2635-.947 2.2635-2.149c0-.0475.021-9.797.021-9.797h2.008c.189 1.7955 1.6385 3.2125 3.4505 3.3425v2.335z",
+    ],
+    color: "deep-purple",
+    href: "https://tiktok.com/",
+  },
+  {
+    title: "Instagram",
+    icon: [
+      "M12.5 8c2.48 0 4.5 2.02 4.5 4.5S14.98 17 12.5 17 8 14.98 8 12.5 10.02 8 12.5 8Zm0-1C9.465 7 7 9.465 7 12.5S9.465 18 12.5 18 18 15.535 18 12.5 15.535 7 12.5 7Zm6-1.5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1ZM8 1.5h9c3.585 0 6.5 2.915 6.5 6.5v9c0 3.585-2.915 6.5-6.5 6.5H8c-3.585 0-6.5-2.915-6.5-6.5V8C1.5 4.415 4.415 1.5 8 1.5Z",
+    ],
+    color: "orange-darken-3",
+    href: "https://instagram.com/",
+  },
+  {
+    title: "Facebook",
+    icon: [
+      "M11.666 2.005c-5.046.165-9.292 4.246-9.641 9.283-.369 5.329 3.442 9.832 8.481 10.589V14.65H8.892c-.726 0-1.314-.588-1.314-1.314s.588-1.314 1.314-1.314h1.613v-1.749c0-2.896 1.411-4.167 3.818-4.167.357 0 .662.008.921.021.636.031 1.129.561 1.129 1.198 0 .663-.537 1.2-1.2 1.2h-.442c-1.022 0-1.379.969-1.379 2.061v1.437h1.87c.591 0 1.043.527.953 1.111l-.108.701c-.073.47-.477.817-.953.817h-1.762v7.247C18.235 21.236 22 17.062 22 12c0-5.634-4.659-10.179-10.334-9.995z",
+    ],
+    color: "blue",
+    href: "https://facebook.com/",
+  },
+  {
+    title: "YouTube",
+    icon: [
+      "M22.4492 7.25c-.1992-1.0996-1.1484-1.9004-2.25-2.1504C18.5508 4.75 15.5 4.5 12.1992 4.5c-3.2988 0-6.3984.25-8.0488.5996-1.0996.25-2.0508 1-2.25 2.1504C1.6992 8.5 1.5 10.25 1.5 12.5s.1992 4 .4492 5.25c.2012 1.0996 1.1504 1.9004 2.25 2.1504C5.9492 20.25 8.9492 20.5 12.25 20.5c3.3008 0 6.3008-.25 8.0508-.5996 1.0996-.25 2.0488-1 2.25-2.1504.1992-1.25.4492-3.0508.5-5.25-.1016-2.25-.3516-4-.6016-5.25ZM9.5 16V9l6.0996 3.5Z",
+    ],
+    color: "red",
+    href: "https://youtube.com/",
+  },
+];
 </script>
-
-<style scoped lang="sass">
-  .social-link :deep(.v-icon)
-    color: rgba(var(--v-theme-on-background), var(--v-disabled-opacity))
-    text-decoration: none
-    transition: .2s ease-in-out
-
-    &:hover
-      color: rgba(25, 118, 210, 1)
-</style>
