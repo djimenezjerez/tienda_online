@@ -9,8 +9,9 @@ import { useAppStore } from "@/stores/app";
 const axios = inject("axios");
 const appStore = useAppStore();
 
-const fetchStore = async function () {
+async function fetchStore() {
   try {
+    appStore.loading = true;
     let res = await axios.get(`api/store`, {
       params: {
         warehouse: 0,
@@ -27,12 +28,14 @@ const fetchStore = async function () {
     console.log(err);
   } finally {
     fetchCategories();
+    appStore.loading = false;
   }
-};
+}
 
-const fetchCategories = async function () {
+async function fetchCategories() {
   if (appStore.store.id > 0) {
     try {
+      appStore.loading = true;
       let res = await axios.get("api/showcase/category", {
         params: {
           store_id: appStore.store.id,
@@ -41,9 +44,11 @@ const fetchCategories = async function () {
       appStore.categories = res.payload.data;
     } catch (err) {
       console.log(err);
+    } finally {
+      appStore.loading = false;
     }
   }
-};
+}
 
 onMounted(() => {
   let res;

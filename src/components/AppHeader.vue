@@ -77,19 +77,36 @@
             </span>
           </v-item>
         </v-item-group>
-        <v-btn variant="text">Ingresar</v-btn>
+        <span>
+          <v-btn icon>
+            <v-icon>{{
+              loggedIn ? "mdi-account" : "mdi-account-outline"
+            }}</v-icon>
+          </v-btn>
+          <v-btn icon @click="router.push({ path: '/cart' })">
+            <v-badge
+              offset-x="-3"
+              offset-y="-1"
+              color="black"
+              :content="totalItems"
+            >
+              <v-icon> mdi-cart-outline</v-icon>
+            </v-badge>
+          </v-btn>
+        </span>
       </div>
     </v-container>
   </v-app-bar>
 </template>
 
 <script setup>
+import { useShowcaseStore } from "@/stores/showcase";
 import { useAppStore } from "@/stores/app";
 import { storeToRefs } from "pinia";
 import router from "@/router";
 
-const appStore = useAppStore();
-const { logoUrl, categories } = storeToRefs(appStore);
+const { loggedIn, logoUrl, categories } = storeToRefs(useAppStore());
+const { totalItems } = storeToRefs(useShowcaseStore());
 
 function searchProducts(category) {
   if (category.hasOwnProperty("name")) {

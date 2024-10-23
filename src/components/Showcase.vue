@@ -7,11 +7,12 @@
             class="cursor-pointer"
             :elevation="isHovering ? 16 : 2"
             v-bind="props"
+            @click="goToProductPage(product)"
           >
             <v-img height="230" :src="appUrl(product.image)"></v-img>
             <v-card-text>
               <div class="font-weight-bold mb-1">
-                {{ product.sell_price.toFixed(2) }} Bs.
+                Bs. {{ product.sell_price.toFixed(2) }}
               </div>
               <div class="font-weight-medium">{{ product.product_name }}</div>
               <div class="font-weight-light">
@@ -44,18 +45,27 @@
 import { inject, onMounted, ref, watch } from "vue";
 import { useAppStore } from "@/stores/app";
 import { appUrl } from "@/plugins/helpers";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { useShowcaseStore } from "@/stores/showcase";
 
+const router = useRouter();
 const axios = inject("axios");
 const appStore = useAppStore();
+const showcaseStore = useShowcaseStore();
 const route = useRoute();
 
 const products = ref([]);
 const pageLength = ref(0);
 const page = ref(1);
 
-const fetchProducts = async function (params) {
+function goToProductPage(product) {
+  showcaseStore.product = product;
+  router.push("/product");
+}
+
+async function fetchProducts(params) {
   try {
+    appStore.loading = true;
     let res = await axios.get("api/showcase/product", {
       params: {
         ...params,
@@ -68,8 +78,10 @@ const fetchProducts = async function (params) {
     pageLength.value = res.payload.last_page;
   } catch (err) {
     console.log(err);
+  } finally {
+    appStore.loading = false;
   }
-};
+}
 
 onMounted(() => {
   fetchProducts(route.query);

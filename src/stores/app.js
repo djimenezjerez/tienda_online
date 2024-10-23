@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { appUrl } from '@/plugins/helpers'
 
 export const useAppStore = defineStore('app', () => {
+  const loading = ref(false)
   const categories = ref([])
   const user = ref({
     id: 0,
@@ -33,7 +34,7 @@ export const useAppStore = defineStore('app', () => {
       return ''
     }
   })
-  const login = function (user, clientId, token) {
+  function login(user, clientId, token) {
     user.value = {
       id: user.id,
       clientId: clientId,
@@ -51,7 +52,7 @@ export const useAppStore = defineStore('app', () => {
     token.value = token
     loggedIn.value = true
   }
-  return { user, loggedIn, token, logoUrl, login, store, categories }
+  return { loading, user, loggedIn, token, logoUrl, login, store, categories }
 }, {
   persist: {
     pick: ['user', 'loggedIn', 'token', 'store', 'categories'],
