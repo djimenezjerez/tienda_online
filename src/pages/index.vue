@@ -51,7 +51,6 @@ async function fetchCategories() {
 }
 
 onMounted(() => {
-  let res;
   if (appStore.store.id <= 0) {
     fetchStore();
   } else {
