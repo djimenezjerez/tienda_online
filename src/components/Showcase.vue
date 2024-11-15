@@ -9,7 +9,11 @@
             v-bind="props"
             @click="goToProductPage(product)"
           >
-            <v-img height="230" :src="appUrl(product.image)"></v-img>
+            <v-img
+              height="230"
+              :lazy-src="lazyProduct"
+              :src="appUrl(product.image)"
+            ></v-img>
             <v-card-text>
               <div class="font-weight-bold mb-1">
                 Bs. {{ product.sell_price.toFixed(2) }}
@@ -47,6 +51,11 @@ import { useAppStore } from "@/stores/app";
 import { appUrl } from "@/plugins/helpers";
 import { useRoute, useRouter } from "vue-router";
 import { useShowcaseStore } from "@/stores/showcase";
+
+const lazyProduct = new URL(
+  "@/assets/lazy-loading-product.png",
+  import.meta.url
+).href;
 
 const router = useRouter();
 const axios = inject("axios");

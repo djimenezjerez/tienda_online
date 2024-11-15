@@ -14,13 +14,15 @@ export const useAppStore = defineStore('app', () => {
     address: '',
     email: '',
     phone: '',
+    cityId: 0,
     cityCode: '',
     cityName: '',
+    documentTypeId: 0,
     documentTypeCode: '',
     documentTypeName: '',
   })
   const loggedIn = ref(false)
-  const token = ref(null)
+  const token = ref('')
   const store = ref({
     id: 0,
     name: import.meta.env.VITE_STORE_NAME,
@@ -34,22 +36,24 @@ export const useAppStore = defineStore('app', () => {
       return ''
     }
   })
-  function login(user, clientId, token) {
+  function login(userData, clientId, tokenApi) {
     user.value = {
-      id: user.id,
+      id: userData.id,
       clientId: clientId,
-      userName: user.username,
-      name: user.name,
-      document: user.document,
-      address: user.address,
-      email: user.email,
-      phone: user.phone,
-      cityCode: user.city_code,
-      cityName: user.city_name,
-      documentTypeCode: user.document_type_code,
-      documentTypeName: user.document_type_name,
+      userName: userData.username,
+      name: userData.name,
+      document: userData.document,
+      address: userData.address,
+      email: userData.email,
+      phone: userData.phone,
+      cityId: userData.city_id,
+      cityCode: userData.city_code,
+      cityName: userData.city_name,
+      documentTypeId: userData.document_type_id,
+      documentTypeCode: userData.document_type_code,
+      documentTypeName: userData.document_type_name,
     }
-    token.value = token
+    token.value = tokenApi
     loggedIn.value = true
   }
   return { loading, user, loggedIn, token, logoUrl, login, store, categories }

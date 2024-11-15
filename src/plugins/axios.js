@@ -1,11 +1,18 @@
 import axios from 'axios'
 
+const app = JSON.parse(localStorage.getItem('app'))
+
+console.log(app && app.token);
+
+
+
 let axiosInstance = axios.create({
   withCredentials: true,
   baseURL: import.meta.env.VITE_APP_URL,
   headers: {
     'Content-Type': 'application/json; charset=UTF-8',
     'Access-Control-Allow-Origin': '*',
+    'Authorization': `Bearer ${app && app.token}`,
   },
 })
 

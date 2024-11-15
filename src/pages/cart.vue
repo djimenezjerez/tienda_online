@@ -102,6 +102,7 @@
         <v-row no-gutters>
           <v-col cols="12" order="3" order-md="1">
             <v-btn
+              @click="router.push({ path: '/checkout' })"
               append-icon="mdi-arrow-right"
               variant="flat"
               color="surface-variant"

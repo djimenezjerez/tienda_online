@@ -1,5 +1,5 @@
 <template>
-  <Showcase />
+  <Showcase v-if="appStore.store.id > 0 && appStore.categories.length > 0" />
 </template>
 
 <script setup>

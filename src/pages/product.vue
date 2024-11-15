@@ -29,7 +29,6 @@
                   :src="appUrl(color.image)"
                   @click="changeColor(color)"
                 ></v-img>
-                <v-avatar v-else :color="color.hex"></v-avatar>
               </v-item>
             </v-col>
           </v-row>

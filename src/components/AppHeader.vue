@@ -87,7 +87,7 @@
             <v-badge
               offset-x="-3"
               offset-y="-1"
-              color="black"
+              color="blue-darken-2"
               :content="totalItems"
             >
               <v-icon> mdi-cart-outline</v-icon>
