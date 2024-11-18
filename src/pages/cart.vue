@@ -46,7 +46,11 @@
         >
           <v-row no-gutters align="center">
             <v-col cols="4">
-              <v-img align-self="center" :src="appUrl(item.image)"></v-img>
+              <v-img
+                max-height="15em"
+                align-self="center"
+                :src="appUrl(item.image)"
+              ></v-img>
             </v-col>
             <v-col cols="8" class="ps-3">
               <v-row justify="space-between">

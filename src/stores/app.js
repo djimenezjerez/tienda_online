@@ -29,6 +29,7 @@ export const useAppStore = defineStore('app', () => {
     logo: '',
     warehouse: 0
   })
+
   const logoUrl = computed(() => {
     if (store.value.id > 0) {
       return appUrl(store.value.logo)
@@ -36,6 +37,28 @@ export const useAppStore = defineStore('app', () => {
       return ''
     }
   })
+
+  function logout() {
+    user.value = {
+      id: 0,
+      clientId: 0,
+      userName: '',
+      name: '',
+      document: '',
+      address: '',
+      email: '',
+      phone: '',
+      cityId: 0,
+      cityCode: '',
+      cityName: '',
+      documentTypeId: 0,
+      documentTypeCode: '',
+      documentTypeName: '',
+    }
+    token.value = ''
+    loggedIn.value = false
+  }
+
   function login(userData, clientId, tokenApi) {
     user.value = {
       id: userData.id,
@@ -56,7 +79,8 @@ export const useAppStore = defineStore('app', () => {
     token.value = tokenApi
     loggedIn.value = true
   }
-  return { loading, user, loggedIn, token, logoUrl, login, store, categories }
+
+  return { loading, user, loggedIn, token, logoUrl, login, logout, store, categories }
 }, {
   persist: {
     pick: ['user', 'loggedIn', 'token', 'store', 'categories'],
