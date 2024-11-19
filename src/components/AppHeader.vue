@@ -114,14 +114,14 @@ const { totalItems } = storeToRefs(useShowcaseStore());
 function searchProducts(category) {
   if (category.hasOwnProperty("name")) {
     router.push({
-      path: "/",
+      path: "/showcase",
       query: {
         brand_id: category.brand_id,
       },
     });
   } else if (category.hasOwnProperty("category_name")) {
     router.push({
-      path: "/",
+      path: "/showcase",
       query: {
         brand_id: category.brand_id,
         category_id: category.category_id,
@@ -130,7 +130,7 @@ function searchProducts(category) {
       },
     });
   } else {
-    router.push({ path: "/" });
+    router.push({ path: "/showcase" });
   }
 }
 </script>
