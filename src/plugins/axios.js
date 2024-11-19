@@ -2,10 +2,6 @@ import axios from 'axios'
 
 const app = JSON.parse(localStorage.getItem('app'))
 
-console.log(app && app.token);
-
-
-
 let axiosInstance = axios.create({
   withCredentials: true,
   baseURL: import.meta.env.VITE_APP_URL,

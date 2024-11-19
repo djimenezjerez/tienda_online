@@ -158,7 +158,7 @@ const axios = inject("axios");
 const showcaseStore = useShowcaseStore();
 const { cart, purchaseOrder, totalItems, totalCart } =
   storeToRefs(showcaseStore);
-const { user, store, loading, loggedIn } = storeToRefs(useAppStore());
+const { user, store, loading } = storeToRefs(useAppStore());
 
 const form = ref(JSON.parse(JSON.stringify(user.value)));
 const attachmentErrors = ref({

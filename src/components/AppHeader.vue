@@ -117,6 +117,7 @@ function searchProducts(category) {
       path: "/showcase",
       query: {
         brand_id: category.brand_id,
+        size_type_id: category.size_type_id,
       },
     });
   } else if (category.hasOwnProperty("category_name")) {
@@ -130,7 +131,7 @@ function searchProducts(category) {
       },
     });
   } else {
-    router.push({ path: "/showcase" });
+    router.push({ path: "/" });
   }
 }
 </script>

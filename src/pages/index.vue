@@ -46,6 +46,8 @@ async function fetchCategories() {
     } finally {
       router.push({ path: "/showcase" });
     }
+  } else {
+    router.push({ path: "/showcase" });
   }
 }
 
