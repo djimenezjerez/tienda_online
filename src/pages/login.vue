@@ -21,6 +21,16 @@
             Ingresar
           </v-btn>
         </v-form>
+        <v-btn
+          type="button"
+          variant="text"
+          color="surface-variant"
+          block
+          class="mt-3"
+          @click="router.push({ path: '/register' })"
+        >
+          No tengo cuenta, quiero registrarme
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -28,6 +38,7 @@
 
 <script setup>
 import { useAppStore } from "@/stores/app";
+import { useShowcaseStore } from "@/stores/showcase";
 import { storeToRefs } from "pinia";
 import { ref, getCurrentInstance } from "vue";
 import router from "@/router";
@@ -35,11 +46,12 @@ import router from "@/router";
 const axios = inject("axios");
 const appStore = useAppStore();
 const { loading } = storeToRefs(appStore);
-
+const { totalItems } = storeToRefs(useShowcaseStore());
 const app = getCurrentInstance();
+
 const form = ref({
-  username: "cliente1@mail.com",
-  password: "cliente1",
+  username: null,
+  password: null,
 });
 const errors = ref({});
 
@@ -65,7 +77,7 @@ async function submit() {
       res.payload.access_token
     );
     await updateToken(res.payload.access_token);
-    router.back();
+    router.push({ path: totalItems.value > 0 ? "/checkout" : "/cart" });
   } catch (err) {
     if (err.response.data.hasOwnProperty("errors")) {
       errors.value = err.response.data.errors;

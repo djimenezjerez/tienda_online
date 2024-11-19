@@ -289,10 +289,6 @@ async function submit() {
 }
 
 onMounted(() => {
-  if (!loggedIn.value) {
-    router.push("/login");
-  } else {
-    fetchCities();
-  }
+  fetchCities();
 });
 </script>

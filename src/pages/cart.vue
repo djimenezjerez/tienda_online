@@ -1,19 +1,17 @@
 <template>
   <v-container v-if="totalItems == 0">
-    <v-row>
+    <v-row justify="center">
       <v-col cols="12">
-        <div class="font-weight-bold text-uppercase text-h5">
+        <div class="font-weight-bold text-uppercase text-h5 text-center">
           Tu carrito está vacío
         </div>
       </v-col>
       <v-col cols="12">
-        <div class="text-subtitle-1">
+        <div class="text-subtitle-1 text-center">
           Cuando hayas añadido algo al carrito, aparecerá aquí. ¿Quieres
           empezar?
         </div>
       </v-col>
-    </v-row>
-    <v-row justify="end" align="end">
       <v-col cols="12" sm="4" lg="3" xl="2">
         <v-btn
           append-icon="mdi-arrow-right"
@@ -106,7 +104,7 @@
         <v-row no-gutters>
           <v-col cols="12" order="3" order-md="1">
             <v-btn
-              @click="router.push({ path: '/checkout' })"
+              @click="router.push({ path: loggedIn ? '/checkout' : '/login' })"
               append-icon="mdi-arrow-right"
               variant="flat"
               color="surface-variant"

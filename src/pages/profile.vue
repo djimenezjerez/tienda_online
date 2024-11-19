@@ -19,6 +19,14 @@
           </v-col>
           <v-col cols="12" md="6" class="my-0 py-0">
             <v-text-field
+              label="Contraseña"
+              v-model="form.password"
+              prepend-inner-icon="mdi-lock"
+              :error-messages="errors.password"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" md="6" class="my-0 py-0">
+            <v-text-field
               label="Teléfono"
               v-model="form.phone"
               prepend-inner-icon="mdi-phone"
@@ -131,7 +139,7 @@ const ordersPage = ref(1);
 const ordersTotal = ref(0);
 const cities = ref([]);
 const documentTypes = ref([]);
-const form = ref(JSON.parse(JSON.stringify(user.value)));
+const form = ref({ ...JSON.parse(JSON.stringify(user.value)), password: null });
 const errors = ref({});
 
 function orderState(state) {
@@ -225,10 +233,6 @@ function closeSession() {
 }
 
 onMounted(() => {
-  if (!loggedIn.value) {
-    router.push("/login");
-  } else {
-    fetchCities();
-  }
+  fetchCities();
 });
 </script>

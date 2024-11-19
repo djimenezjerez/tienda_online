@@ -78,7 +78,10 @@
           </v-item>
         </v-item-group>
         <span>
-          <v-btn icon @click="router.push({ path: '/profile' })">
+          <v-btn
+            icon
+            @click="router.push({ path: loggedIn ? '/profile' : '/login' })"
+          >
             <v-icon>{{
               loggedIn ? "mdi-account" : "mdi-account-outline"
             }}</v-icon>

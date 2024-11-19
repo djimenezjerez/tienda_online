@@ -1,10 +1,9 @@
-<template>
-  <Showcase v-if="appStore.store.id > 0 && appStore.categories.length > 0" />
-</template>
+<template></template>
 
 <script setup>
 import { inject, onMounted } from "vue";
 import { useAppStore } from "@/stores/app";
+import router from "@/router";
 
 const axios = inject("axios");
 const appStore = useAppStore();
@@ -45,7 +44,7 @@ async function fetchCategories() {
     } catch (err) {
       console.log(err);
     } finally {
-      appStore.loading = false;
+      router.push({ path: "/showcase" });
     }
   }
 }
