@@ -6,6 +6,7 @@ import Layouts from 'vite-plugin-vue-layouts'
 import Vue from '@vitejs/plugin-vue'
 import VueRouter from 'unplugin-vue-router/vite'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 // Utilities
 import { defineConfig } from 'vite'
@@ -18,6 +19,14 @@ export default defineConfig({
     Layouts(),
     Vue({
       template: { transformAssetUrls }
+    }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: '.htaccess',
+          dest: '',
+        },
+      ],
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
     Vuetify({
