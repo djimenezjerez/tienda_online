@@ -45,7 +45,8 @@
           <v-row no-gutters align="center">
             <v-col cols="4">
               <v-img
-                max-height="15em"
+                min-height="180px"
+                max-height="180px"
                 align-self="center"
                 :src="item.image"
               ></v-img>
@@ -53,12 +54,13 @@
             <v-col cols="8" class="ps-3">
               <v-row justify="space-between">
                 <v-col cols="10">
-                  <div class="font-weight-bold mb-1">
+                  <span class="font-weight-light">Subtotal:</span>
+                  <span class="ml-2 font-weight-bold mb-1">
                     {{
                       (item.product.sell_price * item.order.quantity).toFixed(2)
                     }}
                     Bs.
-                  </div>
+                  </span>
                 </v-col>
                 <v-col cols="2" class="text-end pe-4">
                   <v-icon
@@ -72,7 +74,12 @@
               <div class="font-weight-medium">
                 {{ item.product.product_name }}
               </div>
-              <div class="font-weight-medium">Talla: {{ item.size.name }}</div>
+              <div class="mb-1">
+                <span class="font-weight-light">Talla:</span>
+                <span class="ml-2 font-weight-bold">
+                  {{ item.size.name }}
+                </span>
+              </div>
               <div class="font-weight-light">
                 Marca: {{ item.product.brand_name }}
               </div>
@@ -82,7 +89,7 @@
               <div class="font-weight-light">
                 Género: {{ item.product.gender_name }}
               </div>
-              <div>
+              <div class="mb-1">
                 <v-number-input
                   v-model="item.order.quantity"
                   :reverse="false"

@@ -2,7 +2,7 @@
   <v-app-bar flat density="compact" class="border-b-thin">
     <v-container>
       <div class="d-flex justify-space-between align-center">
-        <v-img max-width="70px" :src="logoUrl"></v-img>
+        <v-img min-width="70px" max-width="70px" :src="logoUrl"></v-img>
         <v-item-group>
           <v-item>
             <span

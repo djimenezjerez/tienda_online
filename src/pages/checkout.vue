@@ -18,7 +18,7 @@
           variant="flat"
           color="surface-variant"
           block
-          @click="router.replace({ path: '/' })"
+          @click="goToStartPage"
         >
           Volver al inicio
         </v-btn>
@@ -152,7 +152,7 @@ import { useShowcaseStore } from "@/stores/showcase";
 import { useAppStore } from "@/stores/app";
 import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
-import router from "@/router";
+// import router from "@/router";
 
 const axios = inject("axios");
 const showcaseStore = useShowcaseStore();
@@ -286,6 +286,11 @@ async function submit() {
     return;
   }
   await submitClient();
+}
+
+function goToStartPage() {
+  window.location.href = "/";
+  // router.replace({ path: '/' })
 }
 
 onMounted(() => {
