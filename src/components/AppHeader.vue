@@ -2,7 +2,7 @@
   <v-app-bar flat density="compact" class="border-b-thin">
     <v-container>
       <div class="d-flex justify-space-between align-center">
-        <v-img max-width="8rem" cover :src="logoUrl"></v-img>
+        <v-img max-width="70px" :src="logoUrl"></v-img>
         <v-item-group>
           <v-item>
             <span
@@ -61,11 +61,9 @@
                           v-for="subCategory in group.categories"
                           :key="subCategory.id"
                           class="headerMenu"
+                          @click="searchProducts(subCategory)"
                         >
-                          <div
-                            class="font-weight-medium text-uppercase"
-                            @click="searchProducts(subCategory)"
-                          >
+                          <div class="font-weight-medium text-uppercase">
                             {{ subCategory.category_name || subCategory.name }}
                           </div>
                         </v-list-item>
@@ -80,13 +78,13 @@
         <span>
           <v-btn
             icon
-            @click="router.push({ path: loggedIn ? '/profile' : '/login' })"
+            @click="router.replace({ path: loggedIn ? '/profile' : '/login' })"
           >
             <v-icon>{{
               loggedIn ? "mdi-account" : "mdi-account-outline"
             }}</v-icon>
           </v-btn>
-          <v-btn icon @click="router.push({ path: '/cart' })">
+          <v-btn icon @click="router.replace({ path: '/cart' })">
             <v-badge
               offset-x="-3"
               offset-y="-1"
@@ -113,7 +111,7 @@ const { totalItems } = storeToRefs(useShowcaseStore());
 
 function searchProducts(category) {
   if (category.hasOwnProperty("name")) {
-    router.push({
+    router.replace({
       path: "/showcase",
       query: {
         brand_id: category.brand_id,
@@ -121,7 +119,7 @@ function searchProducts(category) {
       },
     });
   } else if (category.hasOwnProperty("category_name")) {
-    router.push({
+    router.replace({
       path: "/showcase",
       query: {
         brand_id: category.brand_id,
@@ -131,7 +129,7 @@ function searchProducts(category) {
       },
     });
   } else {
-    router.push({ path: "/" });
+    router.replace({ path: "/" });
   }
 }
 </script>

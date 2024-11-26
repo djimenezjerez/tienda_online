@@ -44,10 +44,10 @@ async function fetchCategories() {
     } catch (err) {
       console.log(err);
     } finally {
-      router.push({ path: "/showcase" });
+      router.replace({ path: "/showcase" });
     }
   } else {
-    router.push({ path: "/showcase" });
+    router.replace({ path: "/showcase" });
   }
 }
 

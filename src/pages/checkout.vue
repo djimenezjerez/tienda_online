@@ -18,7 +18,7 @@
           variant="flat"
           color="surface-variant"
           block
-          @click="router.push({ path: '/' })"
+          @click="router.replace({ path: '/' })"
         >
           Volver al inicio
         </v-btn>

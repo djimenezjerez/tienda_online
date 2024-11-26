@@ -18,7 +18,7 @@
           variant="flat"
           color="surface-variant"
           block
-          @click="router.push({ path: '/' })"
+          @click="router.replace({ path: '/' })"
         >
           Comenzar
         </v-btn>
@@ -47,7 +47,7 @@
               <v-img
                 max-height="15em"
                 align-self="center"
-                :src="appUrl(item.image)"
+                :src="item.image"
               ></v-img>
             </v-col>
             <v-col cols="8" class="ps-3">
@@ -104,7 +104,9 @@
         <v-row no-gutters>
           <v-col cols="12" order="3" order-md="1">
             <v-btn
-              @click="router.push({ path: loggedIn ? '/checkout' : '/login' })"
+              @click="
+                router.replace({ path: loggedIn ? '/checkout' : '/login' })
+              "
               append-icon="mdi-arrow-right"
               variant="flat"
               color="surface-variant"

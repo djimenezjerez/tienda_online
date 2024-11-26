@@ -229,7 +229,7 @@ async function submit() {
 
 function closeSession() {
   appStore.logout();
-  router.push("/");
+  router.replace("/");
 }
 
 onMounted(() => {

@@ -27,7 +27,7 @@
           color="surface-variant"
           block
           class="mt-3"
-          @click="router.push({ path: '/register' })"
+          @click="router.replace({ path: '/register' })"
         >
           No tengo cuenta, quiero registrarme
         </v-btn>
@@ -77,7 +77,7 @@ async function submit() {
       res.payload.access_token
     );
     await updateToken(res.payload.access_token);
-    router.push({ path: totalItems.value > 0 ? "/checkout" : "/cart" });
+    router.replace({ path: totalItems.value > 0 ? "/checkout" : "/cart" });
   } catch (err) {
     if (err.response.data.hasOwnProperty("errors")) {
       errors.value = err.response.data.errors;

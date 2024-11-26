@@ -26,7 +26,7 @@
                   v-if="color.image"
                   class="cursor-pointer"
                   :style="isSelected ? 'border: 1px solid blue' : ''"
-                  :src="appUrl(color.image)"
+                  :src="color.image"
                   @click="changeColor(color)"
                 ></v-img>
               </v-item>
@@ -285,7 +285,7 @@ async function fetchSizes() {
 
 const imageUrl = computed(() => {
   if (image.value) {
-    return appUrl(image.value);
+    return image.value;
   } else {
     return "";
   }

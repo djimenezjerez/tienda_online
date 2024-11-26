@@ -12,7 +12,7 @@
             <v-img
               height="230"
               :lazy-src="lazyProduct"
-              :src="appUrl(product.image)"
+              :src="product.image"
             ></v-img>
             <v-card-text>
               <div class="font-weight-bold mb-1">
@@ -69,7 +69,7 @@ const page = ref(1);
 
 function goToProductPage(product) {
   showcaseStore.product = product;
-  router.push("/product");
+  router.replace("/product");
 }
 
 async function fetchProducts(params) {

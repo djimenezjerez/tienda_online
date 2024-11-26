@@ -184,7 +184,7 @@ async function login() {
       res.payload.access_token
     );
     await updateToken(res.payload.access_token);
-    router.push({ path: "/cart" });
+    router.replace({ path: "/cart" });
   } catch (err) {
     console.log(err);
 
