@@ -63,8 +63,8 @@
             variant="outlined"
             :step="1"
             :min="0"
-            :max="stock"
-            :hint="`Stock diponible: ${stock} unidad(es)`"
+            :max="stock == null ? 0 : stock"
+            :hint="`Stock diponible: ${stock == null ? 0 : stock} unidad(es)`"
             persistent-hint
           ></v-number-input>
         </div>
