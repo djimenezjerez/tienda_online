@@ -142,11 +142,14 @@
 
 <script setup>
 import { appUrl } from "@/plugins/helpers";
+import { useAppStore } from "@/stores/app";
 import { useShowcaseStore } from "@/stores/showcase";
 import { storeToRefs } from "pinia";
 import { VNumberInput } from "vuetify/labs/VNumberInput";
 import router from "@/router";
 
+const appStore = useAppStore();
+const { loggedIn } = storeToRefs(appStore);
 const { totalItems, totalCart, cart } = storeToRefs(useShowcaseStore());
 
 function removeItem(idx) {

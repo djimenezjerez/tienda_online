@@ -128,11 +128,11 @@
 import { useAppStore } from "@/stores/app";
 import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
-import router from "@/router";
+// import router from "@/router";
 
 const axios = inject("axios");
 const appStore = useAppStore();
-const { user, loggedIn, loading } = storeToRefs(appStore);
+const { user, loading } = storeToRefs(appStore);
 
 const orders = ref([]);
 const ordersPage = ref(1);
@@ -229,7 +229,8 @@ async function submit() {
 
 function closeSession() {
   appStore.logout();
-  router.replace("/");
+  window.location.href = "/";
+  // router.replace("/");
 }
 
 onMounted(() => {
