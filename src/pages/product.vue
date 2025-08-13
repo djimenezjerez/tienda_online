@@ -145,6 +145,8 @@ function changeColor(color) {
     resolve();
   });
   updateForm.then(() => {
+    return fetchSizes();
+  }).then(() => {
     fetchStock();
   });
 }
