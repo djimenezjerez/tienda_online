@@ -11,59 +11,32 @@
               <div class="font-weight-bold">CUENTA</div>
             </v-col>
             <v-col cols="12" md="6" class="my-0 py-0">
-              <v-text-field
-                label="Email"
-                v-model="form.email"
-                prepend-inner-icon="mdi-email"
-                :error-messages="errors.email"
-              ></v-text-field>
+              <v-text-field label="Email" v-model="form.email" prepend-inner-icon="mdi-email"
+                :error-messages="errors.email"></v-text-field>
             </v-col>
             <v-col cols="12" md="6" class="my-0 py-0">
-              <v-text-field
-                type="password"
-                label="Contraseña"
-                v-model="form.password"
-                prepend-inner-icon="mdi-lock"
-                :error-messages="errors.password"
-              ></v-text-field>
+              <v-text-field type="password" label="Contraseña" v-model="form.password" prepend-inner-icon="mdi-lock"
+                :error-messages="errors.password"></v-text-field>
             </v-col>
             <v-col cols="12">
               <div class="font-weight-bold">CONTACTO</div>
             </v-col>
             <v-col cols="12" md="6" class="my-0 py-0">
-              <v-text-field
-                label="Nombre"
-                v-model="form.name"
-                prepend-inner-icon="mdi-account"
-                :error-messages="errors.name"
-              ></v-text-field>
+              <v-text-field label="Nombre" v-model="form.name" prepend-inner-icon="mdi-account"
+                :error-messages="errors.name"></v-text-field>
             </v-col>
             <v-col cols="12" md="6" class="my-0 py-0">
-              <v-text-field
-                label="Teléfono"
-                v-model="form.phone"
-                prepend-inner-icon="mdi-phone"
-                :error-messages="errors.phone"
-              ></v-text-field>
+              <v-text-field label="Teléfono" v-model="form.phone" prepend-inner-icon="mdi-phone"
+                :error-messages="errors.phone"></v-text-field>
             </v-col>
             <v-col cols="12" md="6" class="my-0 py-0">
-              <v-select
-                label="Tipo de documento"
-                v-model="form.documentTypeId"
-                prepend-inner-icon="mdi-card-account-details"
-                :items="documentTypes"
-                item-title="code"
-                item-value="id"
-                :error-messages="errors.documentTypeId"
-              ></v-select>
+              <v-select label="Tipo de documento" v-model="form.documentTypeId"
+                prepend-inner-icon="mdi-card-account-details" :items="documentTypes" item-title="code" item-value="id"
+                :error-messages="errors.documentTypeId"></v-select>
             </v-col>
             <v-col cols="12" md="6" class="my-0 py-0">
-              <v-text-field
-                label="Número de documento"
-                v-model="form.document"
-                prepend-inner-icon="mdi-card-bulleted-outline"
-                :error-messages="errors.document"
-              ></v-text-field>
+              <v-text-field label="Número de documento" v-model="form.document"
+                prepend-inner-icon="mdi-card-bulleted-outline" :error-messages="errors.document"></v-text-field>
             </v-col>
           </v-row>
           <v-row>
@@ -71,23 +44,12 @@
               <div class="font-weight-bold">DIRECCIÓN</div>
             </v-col>
             <v-col cols="12" md="6" class="my-0 py-0">
-              <v-select
-                label="Ciudad"
-                v-model="form.cityId"
-                prepend-inner-icon="mdi-map"
-                :items="cities"
-                item-title="name"
-                item-value="id"
-                :error-messages="errors.cityId"
-              ></v-select>
+              <v-select label="Ciudad" v-model="form.cityId" prepend-inner-icon="mdi-map" :items="cities"
+                item-title="name" item-value="id" :error-messages="errors.cityId"></v-select>
             </v-col>
             <v-col cols="12" md="6" class="my-0 py-0">
-              <v-text-field
-                label="Dirección"
-                v-model="form.address"
-                prepend-inner-icon="mdi-map-marker"
-                :error-messages="errors.address"
-              ></v-text-field>
+              <v-text-field label="Dirección" v-model="form.address" prepend-inner-icon="mdi-map-marker"
+                :error-messages="errors.address"></v-text-field>
             </v-col>
             <v-col cols="12" class="py-0">
               <v-btn type="submit" variant="flat" color="surface-variant" block>
@@ -105,7 +67,7 @@
 import { useAppStore } from "@/stores/app";
 import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
-import router from "@/router";
+// import router from "@/router";
 
 const axios = inject("axios");
 const appStore = useAppStore();

@@ -1,10 +1,35 @@
 <template>
   <v-container>
     <v-row justify="center" align="start">
-      <v-col cols="12" sm="6" md="5" lg="4" xl="3" class="mx-2 px-2">
-        <v-img max-height="20rem" :src="imageUrl"></v-img>
+      <v-col cols="12" md="7" lg="7" xl="6" class="px-2">
+        <v-row justify="center" align="start" v-if="form.color_id > 0">
+          <v-col cols="12" v-if="mobile">
+            <v-carousel show-arrows="hover" hide-delimiters cycle>
+              <v-carousel-item v-for="item in images" :key="item.id">
+                <div style="width: 100%; position: relative;" v-if="item.video">
+                  <video autoplay loop style="top: 0; left: 0; width: 100%; object-fit: cover;" :src="item.url" />
+                </div>
+                <v-img :src="item.url" :alt="item.url" v-else>
+                  <template v-slot:placeholder>
+                    <v-row class="fill-height ma-0" align="center" justify="center">
+                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                    </v-row>
+                  </template>
+                </v-img>
+              </v-carousel-item>
+            </v-carousel>
+          </v-col>
+          <template v-for="item in images" :key="item.id" v-else>
+            <v-col cols="6">
+              <div style="width: 100%; position: relative;" v-if="item.video">
+                <video autoplay loop style="top: 0; left: 0; width: 100%; object-fit: cover;" :src="item.url" />
+              </div>
+              <v-img :src="item.url" v-else></v-img>
+            </v-col>
+          </template>
+        </v-row>
       </v-col>
-      <v-col cols="12" sm="6" md="5" lg="4" xl="3" class="mx-2 px-2">
+      <v-col cols="12" md="4" lg="4" xl="3" class="px-2">
         <div class="font-weight-light text-subtitle-1">
           {{ product.brand_name }}
         </div>
@@ -15,20 +40,10 @@
         <div class="font-weight-bold mt-5">Colores</div>
         <v-item-group mandatory v-model="form.color_id">
           <v-row align="center">
-            <v-col
-              cols="3"
-              v-for="color in colors"
-              :key="color.id"
-              class="text-center"
-            >
+            <v-col cols="3" v-for="color in colors" :key="color.id" class="text-center">
               <v-item v-slot="{ isSelected, toggle }" :value="color.id">
-                <v-img
-                  v-if="color.image"
-                  class="cursor-pointer"
-                  :style="isSelected ? 'border: 1px solid blue' : ''"
-                  :src="color.image"
-                  @click="changeColor(color)"
-                ></v-img>
+                <v-img v-if="color.image" class="cursor-pointer" :style="isSelected ? 'border: 1px solid blue' : ''"
+                  :src="color.image" @click="changeColor(color)"></v-img>
               </v-item>
             </v-col>
           </v-row>
@@ -36,18 +51,9 @@
         <div class="font-weight-bold mt-5">Tallas</div>
         <div class="d-flex flex-wrap">
           <v-item-group mandatory v-model="form.size_id">
-            <v-item
-              v-slot="{ isSelected, toggle }"
-              v-for="size in sizes"
-              :key="size.id"
-              :value="size.id"
-            >
-              <v-avatar
-                class="ma-1 cursor-pointer"
-                :color="isSelected ? 'surface-variant' : 'grey-lighten-2'"
-                rounded="0"
-                @click="toggle && changeSize(size.id)"
-              >
+            <v-item v-slot="{ isSelected, toggle }" v-for="size in sizes" :key="size.id" :value="size.id">
+              <v-avatar class="ma-1 cursor-pointer" :color="isSelected ? 'surface-variant' : 'grey-lighten-2'"
+                rounded="0" @click="toggle && changeSize(size.id)">
                 {{ size.name }}
               </v-avatar>
             </v-item>
@@ -55,45 +61,20 @@
         </div>
         <div class="font-weight-bold mt-5">Cantidad</div>
         <div class="d-flex flex-wrap">
-          <v-number-input
-            v-model="form.quantity"
-            :reverse="false"
-            controlVariant="default"
-            :hideInput="false"
-            variant="outlined"
-            :step="1"
-            :min="0"
-            :max="stock == null ? 0 : stock"
-            :hint="`Stock diponible: ${stock == null ? 0 : stock} unidad(es)`"
-            persistent-hint
-          ></v-number-input>
+          <v-number-input v-model="form.quantity" :reverse="false" controlVariant="default" :hideInput="false"
+            variant="outlined" :step="1" :min="0" :max="stock == null ? 0 : stock"
+            :hint="`Stock diponible: ${stock == null ? 0 : stock} unidad(es)`" persistent-hint></v-number-input>
         </div>
-        <v-btn
-          append-icon="mdi-arrow-right"
-          variant="flat"
-          color="surface-variant"
-          class="mt-3"
-          block
-          :disabled="form.quantity < 1"
-          @click="addToCart"
-        >
+        <v-btn append-icon="mdi-arrow-right" variant="flat" color="surface-variant" class="mt-3" block
+          :disabled="form.quantity < 1" @click="addToCart">
           Añadir al carrito
         </v-btn>
       </v-col>
     </v-row>
   </v-container>
-  <v-snackbar
-    v-model="notification.visible"
-    close-on-content-click
-    :timeout="3000"
-    :color="notification.error ? 'error' : 'success'"
-    class="cursor-pointer"
-  >
-    <v-alert
-      density="compact"
-      :text="notification.message"
-      :type="notification.error ? 'error' : 'success'"
-    ></v-alert>
+  <v-snackbar v-model="notification.visible" close-on-content-click :timeout="3000"
+    :color="notification.error ? 'error' : 'success'" class="cursor-pointer">
+    <v-alert density="compact" :text="notification.message" :type="notification.error ? 'error' : 'success'"></v-alert>
   </v-snackbar>
 </template>
 
@@ -102,15 +83,15 @@ import { useAppStore } from "@/stores/app";
 import { useShowcaseStore } from "@/stores/showcase";
 import { storeToRefs } from "pinia";
 import { computed, onMounted, ref } from "vue";
-import { appUrl } from "@/plugins/helpers";
 import { VNumberInput } from "vuetify/labs/VNumberInput";
+import { useDisplay } from 'vuetify';
 
+const { mobile } = useDisplay()
 const axios = inject("axios");
 const appStore = useAppStore();
 
 const showcaseStore = useShowcaseStore();
 const { product, cart } = storeToRefs(showcaseStore);
-const image = ref(product.value.image);
 const stock = ref(0);
 const colors = ref([]);
 const sizes = ref([]);
@@ -134,7 +115,6 @@ function addToCart() {
       cart.value.push(
         JSON.parse(
           JSON.stringify({
-            image: image.value,
             stock: stock.value,
             color: colors.value.find((o) => o.id == form.value.color_id),
             size: sizes.value.find((o) => o.id == form.value.size_id),
@@ -160,7 +140,6 @@ function addToCart() {
 }
 
 function changeColor(color) {
-  image.value = color.image;
   const updateForm = new Promise((resolve) => {
     form.value.color_id = color.id;
     resolve();
@@ -283,13 +262,20 @@ async function fetchSizes() {
   }
 }
 
-const imageUrl = computed(() => {
-  if (image.value) {
-    return image.value;
+const images = computed(() => {
+  console.log(form.value.color_id);
+
+  if (form.value.color_id > 0) {
+    let color = colors.value.find(o => o.id == form.value.color_id)
+    if (color) {
+      return color.images
+    } else {
+      return []
+    }
   } else {
-    return "";
+    return []
   }
-});
+})
 
 onMounted(() => {
   fetchSizes();

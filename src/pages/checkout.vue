@@ -6,20 +6,12 @@
           Tu pedido fue registrado
         </div>
         <div>
-          <span class="font-weight-light"
-            >Comprueba tu correo para verificar la confirmación y datos de envío
-            de tu pedido</span
-          >
+          <span class="font-weight-light">Comprueba tu correo para verificar la confirmación y datos de envío
+            de tu pedido</span>
         </div>
       </v-col>
       <v-col cols="12" sm="6" md="3" lg="2">
-        <v-btn
-          append-icon="mdi-arrow-right"
-          variant="flat"
-          color="surface-variant"
-          block
-          @click="goToStartPage"
-        >
+        <v-btn append-icon="mdi-arrow-right" variant="flat" color="surface-variant" block @click="goToStartPage">
           Volver al inicio
         </v-btn>
       </v-col>
@@ -40,39 +32,21 @@
             <div class="font-weight-bold">CONTACTO</div>
           </v-col>
           <v-col cols="12" md="6" class="my-0 py-0">
-            <v-text-field
-              label="Nombre"
-              v-model="form.name"
-              prepend-inner-icon="mdi-account"
-              :error-messages="errors.name"
-            ></v-text-field>
+            <v-text-field label="Nombre" v-model="form.name" prepend-inner-icon="mdi-account"
+              :error-messages="errors.name"></v-text-field>
           </v-col>
           <v-col cols="12" md="6" class="my-0 py-0">
-            <v-text-field
-              label="Teléfono"
-              v-model="form.phone"
-              prepend-inner-icon="mdi-phone"
-              :error-messages="errors.phone"
-            ></v-text-field>
+            <v-text-field label="Teléfono" v-model="form.phone" prepend-inner-icon="mdi-phone"
+              :error-messages="errors.phone"></v-text-field>
           </v-col>
           <v-col cols="12" md="6" class="my-0 py-0">
-            <v-select
-              label="Tipo de documento"
-              v-model="form.documentTypeId"
-              prepend-inner-icon="mdi-card-account-details"
-              :items="documentTypes"
-              item-title="code"
-              item-value="id"
-              :error-messages="errors.documentTypeId"
-            ></v-select>
+            <v-select label="Tipo de documento" v-model="form.documentTypeId"
+              prepend-inner-icon="mdi-card-account-details" :items="documentTypes" item-title="code" item-value="id"
+              :error-messages="errors.documentTypeId"></v-select>
           </v-col>
           <v-col cols="12" md="6" class="my-0 py-0">
-            <v-text-field
-              label="Número de documento"
-              v-model="form.document"
-              prepend-inner-icon="mdi-card-bulleted-outline"
-              :error-messages="errors.document"
-            ></v-text-field>
+            <v-text-field label="Número de documento" v-model="form.document"
+              prepend-inner-icon="mdi-card-bulleted-outline" :error-messages="errors.document"></v-text-field>
           </v-col>
         </v-row>
         <v-row>
@@ -80,35 +54,19 @@
             <div class="font-weight-bold">DIRECCIÓN</div>
           </v-col>
           <v-col cols="12" md="6" class="my-0 py-0">
-            <v-select
-              label="Ciudad"
-              v-model="form.cityId"
-              prepend-inner-icon="mdi-map"
-              :items="cities"
-              item-title="name"
-              item-value="id"
-              :error-messages="errors.cityId"
-            ></v-select>
+            <v-select label="Ciudad" v-model="form.cityId" prepend-inner-icon="mdi-map" :items="cities"
+              item-title="name" item-value="id" :error-messages="errors.cityId"></v-select>
           </v-col>
           <v-col cols="12" md="6" class="my-0 py-0">
-            <v-text-field
-              label="Dirección"
-              v-model="form.address"
-              prepend-inner-icon="mdi-map-marker"
-              :error-messages="errors.address"
-            ></v-text-field>
+            <v-text-field label="Dirección" v-model="form.address" prepend-inner-icon="mdi-map-marker"
+              :error-messages="errors.address"></v-text-field>
           </v-col>
         </v-row>
       </v-col>
       <v-col cols="12" md="6">
         <v-row>
           <v-col cols="12">
-            <v-img
-              class="mx-auto"
-              max-width="300"
-              align-self="center"
-              :src="appUrl(store.qr)"
-            ></v-img>
+            <v-img class="mx-auto" max-width="300" align-self="center" :src="appUrl(store.qr)"></v-img>
           </v-col>
           <v-col cols="12">
             <div class="text-center">
@@ -118,25 +76,13 @@
             </div>
           </v-col>
           <v-col cols="12" class="mb-0 py-0">
-            <v-file-input
-              label="Comprobante de pago"
+            <v-file-input label="Comprobante de pago"
               accept="image/bmp,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/html,image/jpeg,application/vnd.oasis.opendocument.text,application/vnd.oasis.opendocument.spreadsheet,image/png,application/pdf,application/vnd.rar,image/svg+xml,application/x-tar,image/tiff,application/xhtml+xml,application/zip,application/x-7z-compressed"
-              prepend-icon=""
-              prepend-inner-icon="mdi-attachment"
-              v-model="attachment"
-              :error-messages="
-                attachmentErrors.content.concat(attachmentErrors.type)
-              "
-            ></v-file-input>
+              prepend-icon="" prepend-inner-icon="mdi-attachment" v-model="attachment" :error-messages="attachmentErrors.content.concat(attachmentErrors.type)
+                "></v-file-input>
           </v-col>
           <v-col cols="12" class="my-0 py-0">
-            <v-btn
-              @click="submit"
-              append-icon="mdi-arrow-right"
-              variant="flat"
-              color="surface-variant"
-              block
-            >
+            <v-btn @click="submit" append-icon="mdi-arrow-right" variant="flat" color="surface-variant" block>
               Finalizar pedido
             </v-btn>
           </v-col>
