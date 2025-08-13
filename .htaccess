@@ -4,11 +4,8 @@
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-
-    RewriteCond %{HTTP_HOST} ^localhost [NC]
-    RewriteRule ^(.*)$ http://localhost:3000/$1 [L,R=301]
-
     RewriteBase /
+
     RewriteRule ^index\.html$ - [L]
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
