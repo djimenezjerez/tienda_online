@@ -233,7 +233,7 @@ async function fetchColors() {
   } catch (err) {
     console.log(err);
   } finally {
-    fetchStock();
+    fetchSizes();
   }
 }
 
@@ -247,6 +247,7 @@ async function fetchSizes() {
           store_id: appStore.store.id,
           size_type_id: product.value.size_type_id,
           brand_id: product.value.brand_id,
+          color_id: form.value.color_id,
           gender_id: product.value.gender_id,
         },
       }
@@ -258,13 +259,11 @@ async function fetchSizes() {
   } catch (err) {
     console.log(err);
   } finally {
-    fetchColors();
+    fetchStock();
   }
 }
 
 const images = computed(() => {
-  console.log(form.value.color_id);
-
   if (form.value.color_id > 0) {
     let color = colors.value.find(o => o.id == form.value.color_id)
     if (color) {
@@ -278,7 +277,7 @@ const images = computed(() => {
 })
 
 onMounted(() => {
-  fetchSizes();
+  fetchColors();
 });
 </script>
 
