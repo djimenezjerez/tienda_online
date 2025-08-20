@@ -4,10 +4,10 @@ const app = JSON.parse(localStorage.getItem('app'))
 
 let axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_URL,
+  // withCredentials: true,
   headers: {
-    'Access-Control-Allow-Credentials': true,
+    'Accept': 'application/json',
     'Content-Type': 'application/json; charset=UTF-8',
-    'Access-Control-Allow-Origin': 'localhost:3000',
     'Authorization': `Bearer ${app && app.token}`,
   },
 })
