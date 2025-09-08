@@ -13,13 +13,8 @@
         </div>
       </v-col>
       <v-col cols="12" sm="4" lg="3" xl="2">
-        <v-btn
-          append-icon="mdi-arrow-right"
-          variant="flat"
-          color="surface-variant"
-          block
-          @click="router.replace({ path: '/' })"
-        >
+        <v-btn append-icon="mdi-arrow-right" variant="flat" color="surface-variant" block
+          @click="router.replace({ path: '/' })">
           Comenzar
         </v-btn>
       </v-col>
@@ -37,19 +32,10 @@
           <div class="font-weight-bold mb-1">SE VENDEN RÁPIDO</div>
           <div>¡Aprovecha antes de que se acaben!</div>
         </div>
-        <div
-          v-for="(item, idx) in cart"
-          :key="item.order.product_id"
-          class="border mb-3"
-        >
+        <div v-for="(item, idx) in cart" :key="item.order.product_id" class="border mb-3">
           <v-row no-gutters align="center">
             <v-col cols="4">
-              <v-img
-                min-height="180px"
-                max-height="180px"
-                align-self="center"
-                :src="item.image"
-              ></v-img>
+              <v-img min-height="180px" max-height="180px" align-self="center" :src="image(item.color)"></v-img>
             </v-col>
             <v-col cols="8" class="ps-3">
               <v-row justify="space-between">
@@ -63,12 +49,7 @@
                   </span>
                 </v-col>
                 <v-col cols="2" class="text-end pe-4">
-                  <v-icon
-                    class="cursor-pointer"
-                    color="grey-darken-2"
-                    @click="removeItem(idx)"
-                    >mdi-close</v-icon
-                  >
+                  <v-icon class="cursor-pointer" color="grey-darken-2" @click="removeItem(idx)">mdi-close</v-icon>
                 </v-col>
               </v-row>
               <div class="font-weight-medium">
@@ -90,18 +71,9 @@
                 Género: {{ item.product.gender_name }}
               </div>
               <div class="mb-1">
-                <v-number-input
-                  v-model="item.order.quantity"
-                  :reverse="false"
-                  controlVariant="default"
-                  :hideInput="false"
-                  variant="solo-filled"
-                  density="compact"
-                  :step="1"
-                  :min="1"
-                  :max="item.stock"
-                  hide-details
-                ></v-number-input>
+                <v-number-input v-model="item.order.quantity" :reverse="false" controlVariant="default"
+                  :hideInput="false" variant="solo-filled" density="compact" :step="1" :min="1" :max="item.stock"
+                  hide-details></v-number-input>
               </div>
             </v-col>
           </v-row>
@@ -110,15 +82,9 @@
       <v-col cols="12" md="5" lg="4">
         <v-row no-gutters>
           <v-col cols="12" order="3" order-md="1">
-            <v-btn
-              @click="
-                router.replace({ path: loggedIn ? '/checkout' : '/login' })
-              "
-              append-icon="mdi-arrow-right"
-              variant="flat"
-              color="surface-variant"
-              block
-            >
+            <v-btn @click="
+              router.replace({ path: loggedIn ? '/checkout' : '/login' })
+              " append-icon="mdi-arrow-right" variant="flat" color="surface-variant" block>
               Continuar
             </v-btn>
           </v-col>
@@ -148,7 +114,6 @@
 </template>
 
 <script setup>
-import { appUrl } from "@/plugins/helpers";
 import { useAppStore } from "@/stores/app";
 import { useShowcaseStore } from "@/stores/showcase";
 import { storeToRefs } from "pinia";
@@ -161,5 +126,14 @@ const { totalItems, totalCart, cart } = storeToRefs(useShowcaseStore());
 
 function removeItem(idx) {
   cart.value.splice(idx, 1);
+}
+
+function image(color) {
+  const images = color.images.filter(o => !o.video)
+  if (images.length > 0) {
+    return images[0].url
+  } else {
+    return null
+  }
 }
 </script>
